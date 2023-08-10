@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 1574309913}
   - component: {fileID: 1574309918}
   - component: {fileID: 1574309917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -421,6 +421,11 @@ MonoBehaviour:
   sensitivity_y: 15
   min_y: -90
   max_y: 90
+  shootRange: 500
+  shootMask:
+    serializedVersion: 2
+    m_Bits: 1
+  fireRate: 0.5
 --- !u!143 &1574309918
 CharacterController:
   m_ObjectHideFlags: 0

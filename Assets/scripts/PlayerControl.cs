@@ -23,6 +23,11 @@ public class PlayerControl : MonoBehaviour
     float currentYRotation;
     Vector2 aimVector;
 
+    [Header("Shooting")]
+    public float shootRange = 500f;
+    public LayerMask shootMask;
+    public float fireRate = 0.1f;
+    private bool isFiring = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +51,10 @@ public class PlayerControl : MonoBehaviour
 
         aimVector.x = Input.GetAxis("Mouse X");
         aimVector.y = Input.GetAxis("Mouse Y");
+
+        if(Input.GetButtonDown("Fire1") && !isFiring) {
+            Shoot();
+        }
     }
 
     void Move()
@@ -66,5 +75,20 @@ public class PlayerControl : MonoBehaviour
         currentYRotation = Mathf.Clamp(currentYRotation, min_y, max_y);
 
         lookCamera.eulerAngles = new Vector3(-currentYRotation, lookCamera.eulerAngles.y, lookCamera.eulerAngles.z);
+    }
+
+    void Shoot() {
+        RaycastHit hit;
+        if(Physics.Raycast(lookCamera.position, lookCamera.forward, out hit, shootRange, shootMask)) {
+            // isFiring = true;
+            print(hit.point.ToString());
+            StartCoroutine(FireRoutine());
+        }
+    }
+
+    IEnumerator FireRoutine() {
+        isFiring = true;
+        yield return new WaitForSeconds(fireRate);
+        isFiring = false;
     }
 }
